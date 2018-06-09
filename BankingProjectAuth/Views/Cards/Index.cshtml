@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BankingProjectAuth.Models.Card>
+
+@{
+    ViewData["Title"] = "Types of Cards";
+}
+
+<h2>Cards</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provider)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardHolder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DailyLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontlyLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.POSLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardHolder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontlyLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POSLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

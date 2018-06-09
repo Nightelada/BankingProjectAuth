@@ -63,7 +63,7 @@ namespace BankingProjectAuth
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.Cookie.Name = "Banking Project";
+                options.Cookie.Name = "Banking_Project_Auth";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 // If the LoginPath isn't set, ASP.NET Core defaults 
                 // the path to /Account/Login.

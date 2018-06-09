@@ -22,5 +22,11 @@ namespace BankingProjectAuth.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Customer> Customer { get; set; }
+
+        public DbSet<Card> Card { get; set; }
+
+        public DbSet<Account> Account { get; set; }
     }
 }
