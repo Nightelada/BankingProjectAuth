@@ -40,7 +40,7 @@ namespace BankingProjectAuth.Models
         public DateTime DateOfBirth { get; set; }
 
         [ForeignKey("Account")]
-        public int? AccountId { get; set; }
+        public int? AccountID { get; set; }
         public virtual Account Account { get; set; }
     }
 }

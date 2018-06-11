@@ -23,7 +23,7 @@ namespace BankingProjectAuth.Controllers
             ApplicationUser currentUser = _context.Users.FirstOrDefault(x => x.Email == currentUserId);
 
             var cards = _context.Card.Include(c => c.Account);
-            return View(await cards.Where(g => g.CardHolder == "Pepkata").ToListAsync());
+            return View(await cards.Where(g => g.CardHolder != "Pepkata").ToListAsync());
         }
 
         // GET: Cards/Details/5
@@ -87,7 +87,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,AccountID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (id != card.ID)
             {

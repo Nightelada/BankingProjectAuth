@@ -1,15 +1,19 @@
 ﻿using BankingProjectAuth.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BankingProjectAuth.Models
 {
     public class SeedData
     {
-        public static void Initialize(IServiceProvider serviceProvider)
+        private static UserManager<ApplicationUser> userManager;
+
+        public async static Task Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
@@ -67,76 +71,12 @@ namespace BankingProjectAuth.Models
                     context.Account.AddRange(accounts);
                     context.SaveChanges();
                 }
-
-
-                var customers = new List<Customer> {
-                     new Customer
-                     {
-                         AccountId = accounts[0].ID,
-                         Address = "Blagoevgrad",
-                         DateOfBirth = DateTime.Parse("1989-1-11"),
-                         Email = "blagoevgrad@abv.bg",
-                         FirstName = "Blago",
-                         LastName = "Evgrad",
-                         Gender = "Female",
-                         Phone = "0-800",
-                         Username = "pepkata1",
-                         Password = "test",
-                         ConfirmPassword = "test"
-                     },
-
-                    new Customer
-                    {
-                        AccountId = accounts[1].ID,
-                        Address = "Sofia",
-                        DateOfBirth = DateTime.Parse("1989-1-11 12:00:00"),
-                        Email = "sofia@abv.bg",
-                        FirstName = "So",
-                        LastName = "Fia",
-                        Gender = "Male",
-                        Phone = "0-800",
-                        Username = "pepkata2",
-                        Password = "test",
-                        ConfirmPassword = "test"
-                    },
-
-                    new Customer
-                    {
-                        AccountId = accounts[2].ID,
-                        Address = "Selishte",
-                        DateOfBirth = DateTime.Parse("1989-1-11"),
-                        Email = "selishte@abv.bg",
-                        FirstName = "Seli",
-                        LastName = "Shte",
-                        Gender = "Apache Helicopter",
-                        Phone = "0-500",
-                        Username = "pepkata3",
-                        Password = "test",
-                        ConfirmPassword = "test"
-                    },
-
-                   new Customer
-                   {
-                       AccountId = accounts[3].ID,
-                       Address = "Finland",
-                       DateOfBirth = DateTime.Parse("1989-1-11"),
-                       Email = "finland@abv.bg",
-                       FirstName = "Fin",
-                       LastName = "Land",
-                       Gender = "Other",
-                       Phone = "0-600",
-                       Username = "pepkata4",
-                       Password = "test",
-                       ConfirmPassword = "test"
-                   }
-                };
-
-                // Look for any customers.
-                if (!context.Customer.Any())
+                else
                 {
-                    context.Customer.AddRange(customers);
-                    context.SaveChanges();
+                    accounts = context.Account.ToList();
                 }
+
+
                 var cards = new List<Card> {
                     new Card
                     {
@@ -189,6 +129,35 @@ namespace BankingProjectAuth.Models
                 {
                     context.Card.AddRange(cards);
                     context.SaveChanges();
+                }
+
+                var users = new List<ApplicationUser>
+                {
+                    new ApplicationUser
+                    {
+                        FirstName = "Petar",
+                        LastName = "Hristov",
+                        Gender = Gender.Male,
+                        Address = "Sofia, Druzhba 2, bl.409, vh.V, et.8, ap.72",
+                        DateOfBirth = DateTime.Now,
+                        PhoneNumber = "0878787878",
+                        AccountID = accounts[0].ID,
+                        Email = "pepi3000@abv.bg",
+                        NormalizedEmail = "PEPI3000@ABV.BG",
+                        EmailConfirmed = true,
+                        UserName = "pepi3000@abv.bg",
+                        NormalizedUserName = "PEPI3000@ABV.BG"
+                    }
+                };
+
+                if (!context.User.Any())
+                {
+                    userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                    foreach (ApplicationUser user in users)
+                    {
+                        IdentityResult asd = await userManager.CreateAsync(user, "Dardar123");
+                    }
                 }
             }
         }

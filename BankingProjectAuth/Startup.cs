@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using BankingProjectAuth.Data;
+﻿using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
 using BankingProjectAuth.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace BankingProjectAuth
 {
@@ -80,6 +77,9 @@ namespace BankingProjectAuth
             services.AddMvc();
 
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            SeedData.Initialize(services.BuildServiceProvider()).Wait();
+
 
         }
 
