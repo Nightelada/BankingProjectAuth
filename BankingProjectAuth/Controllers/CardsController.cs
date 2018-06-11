@@ -1,5 +1,4 @@
-﻿using BankingProject.Models;
-using BankingProjectAuth.Data;
+﻿using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +19,11 @@ namespace BankingProjectAuth.Controllers
         // GET: Cards
         public async Task<IActionResult> Index()
         {
+            string currentUserId = User.Identity.Name;
+            ApplicationUser currentUser = _context.Users.FirstOrDefault(x => x.Email == currentUserId);
+
             var cards = _context.Card.Include(c => c.Account);
-            return View(await cards.ToListAsync());
+            return View(await cards.Where(g => g.CardHolder == "Pepkata").ToListAsync());
         }
 
         // GET: Cards/Details/5

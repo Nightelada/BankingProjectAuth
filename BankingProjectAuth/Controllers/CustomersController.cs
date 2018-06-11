@@ -23,17 +23,6 @@ namespace BankingProject.Controllers
         // GET: Customers
         public async Task<IActionResult> Index(string customerGender, string searchString)
         {
-            /*var movies = from m in _context.Customer
-                         select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.Address.Contains(searchString));
-            }
-
-            return View(await movies.ToListAsync());
-            */
-
             // Use LINQ to get list of genres.
             IQueryable<string> genderQuery = from m in _context.Customer
                                             orderby m.Gender

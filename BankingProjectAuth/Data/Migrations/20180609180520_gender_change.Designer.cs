@@ -12,9 +12,10 @@ using System;
 namespace BankingProjectAuth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180609180520_gender_change")]
+    partial class gender_change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +61,8 @@ namespace BankingProjectAuth.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<int?>("AccountId");
+                    b.Property<int?>("AccountId")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -95,6 +97,9 @@ namespace BankingProjectAuth.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
 
                     b.Property<string>("PhoneNumber");
 
