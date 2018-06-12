@@ -1,0 +1,125 @@
+﻿@model IEnumerable<BankingProjectAuth.Models.Credit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPrincipal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwedPrincipal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OverduePrincipal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InterestRate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalInterest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwedInterest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OverdueInterest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InstallmentAmmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NextInstallment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastInstallment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalTaxes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwedTaxes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OverdueTaxes)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankingAccount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrincipal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwedPrincipal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverduePrincipal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterestRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalInterest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwedInterest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverdueInterest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallmentAmmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextInstallment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastInstallment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalTaxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwedTaxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverdueTaxes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankingAccount.ID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

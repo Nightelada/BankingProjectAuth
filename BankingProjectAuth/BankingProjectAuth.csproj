@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-BankingProjectAuth-3FDADAF3-13DC-4A25-BBB2-639E62456B5B</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Common\Binders\**" />
+    <Content Remove="Common\Binders\**" />
+    <EmbeddedResource Remove="Common\Binders\**" />
+    <None Remove="Common\Binders\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
@@ -20,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Binders\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>

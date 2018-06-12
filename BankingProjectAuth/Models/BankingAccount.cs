@@ -19,9 +19,13 @@ namespace BankingProjectAuth.Models
         OffshoreAccount
     }
 
-    public class Account
+    public class BankingAccount
     {
         public int ID { get; set; }
+
+        [ForeignKey("User")]
+        public string UserID { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Display(Name = "Account Type")]
         public AccountType AccountType { get; set; }
@@ -47,5 +51,8 @@ namespace BankingProjectAuth.Models
         public decimal UsedOverdraft { get; set; }
 
         public virtual ICollection<Card> Cards { get; set; }
+        public virtual ICollection<Credit> Credits { get; set; }
+        public virtual ICollection<UtilityBill> UtilityBills { get; set; }
+
     }
 }

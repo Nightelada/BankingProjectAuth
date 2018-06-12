@@ -61,7 +61,7 @@ namespace BankingProjectAuth
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Name = "Banking_Project_Auth";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
                 // If the LoginPath isn't set, ASP.NET Core defaults 
                 // the path to /Account/Login.
                 options.LoginPath = "/Account/Login";
@@ -79,8 +79,6 @@ namespace BankingProjectAuth
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             SeedData.Initialize(services.BuildServiceProvider()).Wait();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

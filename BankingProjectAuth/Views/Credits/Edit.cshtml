@@ -1,0 +1,109 @@
+﻿@model BankingProjectAuth.Models.Credit
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Credit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="BankingAccountID" class="control-label"></label>
+                <select asp-for="BankingAccountID" class="form-control" asp-items="ViewBag.BankingAccountID"></select>
+                <span asp-validation-for="BankingAccountID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <select asp-for="Duration" class="form-control"></select>
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPrincipal" class="control-label"></label>
+                <input asp-for="TotalPrincipal" class="form-control" />
+                <span asp-validation-for="TotalPrincipal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwedPrincipal" class="control-label"></label>
+                <input asp-for="OwedPrincipal" class="form-control" />
+                <span asp-validation-for="OwedPrincipal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OverduePrincipal" class="control-label"></label>
+                <input asp-for="OverduePrincipal" class="form-control" />
+                <span asp-validation-for="OverduePrincipal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InterestRate" class="control-label"></label>
+                <input asp-for="InterestRate" class="form-control" />
+                <span asp-validation-for="InterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalInterest" class="control-label"></label>
+                <input asp-for="TotalInterest" class="form-control" />
+                <span asp-validation-for="TotalInterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwedInterest" class="control-label"></label>
+                <input asp-for="OwedInterest" class="form-control" />
+                <span asp-validation-for="OwedInterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OverdueInterest" class="control-label"></label>
+                <input asp-for="OverdueInterest" class="form-control" />
+                <span asp-validation-for="OverdueInterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InstallmentAmmount" class="control-label"></label>
+                <input asp-for="InstallmentAmmount" class="form-control" />
+                <span asp-validation-for="InstallmentAmmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextInstallment" class="control-label"></label>
+                <input asp-for="NextInstallment" class="form-control" />
+                <span asp-validation-for="NextInstallment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastInstallment" class="control-label"></label>
+                <input asp-for="LastInstallment" class="form-control" />
+                <span asp-validation-for="LastInstallment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalTaxes" class="control-label"></label>
+                <input asp-for="TotalTaxes" class="form-control" />
+                <span asp-validation-for="TotalTaxes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwedTaxes" class="control-label"></label>
+                <input asp-for="OwedTaxes" class="form-control" />
+                <span asp-validation-for="OwedTaxes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OverdueTaxes" class="control-label"></label>
+                <input asp-for="OverdueTaxes" class="form-control" />
+                <span asp-validation-for="OverdueTaxes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

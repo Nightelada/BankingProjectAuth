@@ -12,9 +12,10 @@ using System;
 namespace BankingProjectAuth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180612190442_switch_foreign_keys")]
+    partial class switch_foreign_keys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +122,7 @@ namespace BankingProjectAuth.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("BankingAccount");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("BankingProjectAuth.Models.Card", b =>
@@ -154,87 +155,6 @@ namespace BankingProjectAuth.Data.Migrations
                     b.HasIndex("BankingAccountID");
 
                     b.ToTable("Card");
-                });
-
-            modelBuilder.Entity("BankingProjectAuth.Models.Credit", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BankingAccountID");
-
-                    b.Property<int>("Duration");
-
-                    b.Property<decimal>("InstallmentAmmount")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("InterestRate");
-
-                    b.Property<DateTime>("LastInstallment");
-
-                    b.Property<DateTime>("NextInstallment");
-
-                    b.Property<decimal>("OverdueInterest")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("OverduePrincipal")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("OverdueTaxes")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("OwedInterest")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("OwedPrincipal")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("OwedTaxes")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("TotalInterest")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("TotalPrincipal")
-                        .HasColumnType("money");
-
-                    b.Property<decimal>("TotalTaxes")
-                        .HasColumnType("money");
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BankingAccountID");
-
-                    b.ToTable("Credit");
-                });
-
-            modelBuilder.Entity("BankingProjectAuth.Models.UtilityBill", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("Ammount")
-                        .HasColumnType("money");
-
-                    b.Property<int?>("BankingAccountID");
-
-                    b.Property<DateTime>("DebtDate");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Status");
-
-                    b.Property<string>("SubscriptionNumber");
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BankingAccountID");
-
-                    b.ToTable("UtilityBill");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -356,20 +276,6 @@ namespace BankingProjectAuth.Data.Migrations
                 {
                     b.HasOne("BankingProjectAuth.Models.BankingAccount", "BankingAccount")
                         .WithMany("Cards")
-                        .HasForeignKey("BankingAccountID");
-                });
-
-            modelBuilder.Entity("BankingProjectAuth.Models.Credit", b =>
-                {
-                    b.HasOne("BankingProjectAuth.Models.BankingAccount", "BankingAccount")
-                        .WithMany("Credits")
-                        .HasForeignKey("BankingAccountID");
-                });
-
-            modelBuilder.Entity("BankingProjectAuth.Models.UtilityBill", b =>
-                {
-                    b.HasOne("BankingProjectAuth.Models.BankingAccount", "BankingAccount")
-                        .WithMany("UtilityBills")
                         .HasForeignKey("BankingAccountID");
                 });
 

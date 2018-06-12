@@ -12,9 +12,10 @@ using System;
 namespace BankingProjectAuth.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180612211002_add_credit_and_utility_bill_tables")]
+    partial class add_credit_and_utility_bill_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,6 +224,8 @@ namespace BankingProjectAuth.Data.Migrations
                     b.Property<DateTime>("DebtDate");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("Provider");
 
                     b.Property<int>("Status");
 

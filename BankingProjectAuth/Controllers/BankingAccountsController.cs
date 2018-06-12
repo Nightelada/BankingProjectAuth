@@ -8,39 +8,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BankingProjectAuth.Controllers
+namespace BankingProject.Models
 {
-    [Authorize]
-    public class CardsController : Controller
+    public class BankingAccountsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CardsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public BankingAccountsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: Cards
+        // GET: Accounts
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var roles = await _userManager.GetRolesAsync(currentUser);
 
-            IEnumerable<Card> cards = _context.Card.Include(c => c.BankingAccount);
+            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(c => c.User);
 
             if (!roles.Contains("Administrator"))
             {
-                return View(cards.Where(g => g.BankingAccount.UserID.Equals(currentUser.Id)));
+                return View(bankingAccounts.Where(g => g.UserID.Equals(currentUser.Id)));
             }
             else
             {
-                return View(cards);
+                return View(bankingAccounts);
             }
         }
 
-        // GET: Cards/Details/5
+        // GET: Accounts/Details/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,39 +49,41 @@ namespace BankingProjectAuth.Controllers
                 return NotFound();
             }
 
-            var card = await _context.Card
+            var account = await _context.BankingAccount
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (card == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(card);
+            return View(account);
         }
 
-        // GET: Cards/Create
+        // GET: Accounts/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cards/Create
+        // POST: Accounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        public async Task<IActionResult> Create([Bind("ID,AccountType,IBAN,Balance,Available,Blocked,Currency,AllowedOverdraft,UsedOverdraft")] BankingAccount account)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(card);
+                _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(card);
+            return View(account);
         }
 
-        // GET: Cards/Edit/5
+        // GET: Accounts/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,22 +91,23 @@ namespace BankingProjectAuth.Controllers
                 return NotFound();
             }
 
-            var card = await _context.Card.SingleOrDefaultAsync(m => m.ID == id);
-            if (card == null)
+            var account = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
+            if (account == null)
             {
                 return NotFound();
             }
-            return View(card);
+            return View(account);
         }
 
-        // POST: Cards/Edit/5
+        // POST: Accounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,Currency,AllowedOverdraft,UsedOverdraft")] BankingAccount account)
         {
-            if (id != card.ID)
+            if (id != account.ID)
             {
                 return NotFound();
             }
@@ -112,12 +116,12 @@ namespace BankingProjectAuth.Controllers
             {
                 try
                 {
-                    _context.Update(card);
+                    _context.Update(account);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CardExists(card.ID))
+                    if (!AccountExists(account.ID))
                     {
                         return NotFound();
                     }
@@ -128,10 +132,11 @@ namespace BankingProjectAuth.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(card);
+            return View(account);
         }
 
-        // GET: Cards/Delete/5
+        // GET: Accounts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,30 +144,31 @@ namespace BankingProjectAuth.Controllers
                 return NotFound();
             }
 
-            var card = await _context.Card
+            var account = await _context.BankingAccount
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (card == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(card);
+            return View(account);
         }
 
-        // POST: Cards/Delete/5
+        // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var card = await _context.Card.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Card.Remove(card);
+            var account = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
+            _context.BankingAccount.Remove(account);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CardExists(int id)
+        private bool AccountExists(int id)
         {
-            return _context.Card.Any(e => e.ID == id);
+            return _context.BankingAccount.Any(e => e.ID == id);
         }
     }
 }

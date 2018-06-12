@@ -1,0 +1,117 @@
+﻿@model BankingProjectAuth.Models.Credit
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Credit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrincipal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrincipal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwedPrincipal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwedPrincipal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OverduePrincipal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OverduePrincipal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InterestRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InterestRate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalInterest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalInterest)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwedInterest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwedInterest)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OverdueInterest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OverdueInterest)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InstallmentAmmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InstallmentAmmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NextInstallment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NextInstallment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastInstallment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastInstallment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTaxes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalTaxes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwedTaxes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwedTaxes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OverdueTaxes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OverdueTaxes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BankingAccount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BankingAccount.ID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

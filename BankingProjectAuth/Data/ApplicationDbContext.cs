@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BankingProjectAuth.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace BankingProjectAuth.Data
 {
@@ -32,8 +28,15 @@ namespace BankingProjectAuth.Data
 
         public DbSet<Card> Card { get; set; }
 
-        public DbSet<Account> Account { get; set; }
+        public DbSet<BankingAccount> BankingAccount { get; set; }
 
         public DbSet<ApplicationUser> User { get; set; }
+
+        public DbSet<IdentityRole> Role { get; set; }
+
+        public DbSet<Credit> Credit { get; set; }
+
+        public DbSet<UtilityBill> UtilityBill { get; set; }
+
     }
 }

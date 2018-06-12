@@ -38,9 +38,5 @@ namespace BankingProjectAuth.Models
         [Required]
         [Display(Name = "Date of Birth"), DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
-        [ForeignKey("Account")]
-        public int? AccountID { get; set; }
-        public virtual Account Account { get; set; }
     }
 }
