@@ -78,6 +78,7 @@ namespace BankingProjectAuth.Models
         [Display(Name = "Overdue Taxes"), Column(TypeName = "money")]
         public decimal OverdueTaxes { get; set; }
 
+        [Display(Name = "Banking Account")]
         public virtual BankingAccount BankingAccount { get; set; }
     }
 }

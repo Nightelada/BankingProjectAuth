@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BankingProjectAuth.Models.UtilityBill>
+﻿@model IEnumerable<BankingProjectAuth.Models.MoneyTransfer>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,19 +16,31 @@
                     @Html.DisplayNameFor(model => model.Type)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Status)
+                    @Html.DisplayNameFor(model => model.Currency)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.RecipientName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SubscriptionNumber)
+                    @Html.DisplayNameFor(model => model.RecipientIBAN)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DebtDate)
+                    @Html.DisplayNameFor(model => model.RecipientCountry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipientAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AdditionalReason)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransferDate)
                 </th>
             <th>
                 @Html.DisplayNameFor(model => model.BankingAccount)
@@ -43,19 +55,31 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Currency)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.RecipientName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubscriptionNumber)
+                @Html.DisplayFor(modelItem => item.RecipientIBAN)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DebtDate)
+                @Html.DisplayFor(modelItem => item.RecipientCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipientAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalReason)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransferDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BankingAccount.ID)

@@ -38,5 +38,9 @@ namespace BankingProjectAuth.Data
 
         public DbSet<UtilityBill> UtilityBill { get; set; }
 
+        public DbSet<MoneyTransfer> MoneyTransfer { get; set; }
+
+        public DbSet<Currency> Currency { get; set; }
+
     }
 }

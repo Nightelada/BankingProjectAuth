@@ -3,6 +3,7 @@ using BankingProjectAuth.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace BankingProject.Models
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var roles = await _userManager.GetRolesAsync(currentUser);
 
-            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(c => c.User);
+            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(c => c.User).Include(x => x.Currency);
 
             if (!roles.Contains("Administrator"))
             {
@@ -61,9 +62,16 @@ namespace BankingProject.Models
 
         // GET: Accounts/Create
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            IQueryable<Currency> currencyQuery = from m in _context.Currency
+                                                 orderby m.Code
+                                                 select m;
+
+            var vm = new BankingAccountCurrencyViewModel();
+            vm.currencies = new SelectList(await currencyQuery.ToListAsync(),"ID", "CurrencyInfo");
+
+            return View(vm);
         }
 
         // POST: Accounts/Create
@@ -71,15 +79,15 @@ namespace BankingProject.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,AccountType,IBAN,Balance,Available,Blocked,Currency,AllowedOverdraft,UsedOverdraft")] BankingAccount account)
+        public async Task<IActionResult> Create(BankingAccountCurrencyViewModel accountViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(account);
+                _context.Add(accountViewModel.account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(account);
+            return View(accountViewModel.account);
         }
 
         // GET: Accounts/Edit/5

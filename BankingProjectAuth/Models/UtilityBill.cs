@@ -46,17 +46,19 @@ namespace BankingProjectAuth.Models
 
         public UtilityBillStatus Status { get; set; }
 
+        [StringLength(50)]
         public string Name { get; set; }
 
-        [Display(Name = "Subscription Number")]
+        [Display(Name = "Subscription Number"), StringLength(50)]
         public string SubscriptionNumber { get; set; }
 
         [Display(Name = "Debt Date")]
         public DateTime DebtDate { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Ammount { get; set; }
-        
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Banking Account")]
         public virtual BankingAccount BankingAccount { get; set; }
     }
 }

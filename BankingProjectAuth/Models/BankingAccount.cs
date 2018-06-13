@@ -42,7 +42,9 @@ namespace BankingProjectAuth.Models
         [Column(TypeName = "money")]
         public decimal Blocked { get; set; }
 
-        public string Currency { get; set; }
+        [ForeignKey("Currency")]
+        public int? CurrencyID { get; set; }
+        public Currency Currency { get; set; }
 
         [Display(Name = "Allowed Overdraft"), Column(TypeName = "money")]
         public decimal AllowedOverdraft { get; set; }
@@ -53,6 +55,6 @@ namespace BankingProjectAuth.Models
         public virtual ICollection<Card> Cards { get; set; }
         public virtual ICollection<Credit> Credits { get; set; }
         public virtual ICollection<UtilityBill> UtilityBills { get; set; }
-
+        public virtual ICollection<MoneyTransfer> MoneyTransfers { get; set; }
     }
 }

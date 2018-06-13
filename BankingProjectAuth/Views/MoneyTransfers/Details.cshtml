@@ -1,0 +1,84 @@
+﻿@model BankingProjectAuth.Models.MoneyTransfer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MoneyTransfer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Currency)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipientName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipientName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipientIBAN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipientIBAN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipientCountry)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipientCountry)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipientAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecipientAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalReason)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AdditionalReason)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TransferDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TransferDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BankingAccount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BankingAccount.ID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

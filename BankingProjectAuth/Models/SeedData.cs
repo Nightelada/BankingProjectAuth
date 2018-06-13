@@ -109,6 +109,7 @@ namespace BankingProjectAuth.Models
                 }
 
                 users = context.User.ToList();
+                var currencies = context.Currency.ToList();
 
                 var accounts = new List<BankingAccount> {
                         new BankingAccount
@@ -118,7 +119,7 @@ namespace BankingProjectAuth.Models
                             Balance = 3500.00M,
                             Available = 400.20M,
                             Blocked = 5600.10M,
-                            Currency = "BGN",
+                            Currency = currencies.Find(x => x.Code.Equals("BGN")),
                             AllowedOverdraft = 300.00M,
                             UsedOverdraft = 150.00M,
                             User = users[0]
@@ -130,7 +131,7 @@ namespace BankingProjectAuth.Models
                              Balance = -400.00M,
                              Available = 123.20M,
                              Blocked = 52600.10M,
-                             Currency = "BGN",
+                             Currency = currencies.Find(x => x.Code.Equals("BAM")),
                              AllowedOverdraft = 300.00M,
                              UsedOverdraft = 0.00001M,
                              User = users[1]
@@ -142,7 +143,7 @@ namespace BankingProjectAuth.Models
                               Balance = 3300.030M,
                               Available = 400.20M,
                               Blocked = 5610.10M,
-                              Currency = "BGN",
+                              Currency = currencies.Find(x => x.Code.Equals("USD")),
                               AllowedOverdraft = 800.00M,
                               UsedOverdraft = 150.00M,
                               User = users[2]
@@ -154,7 +155,7 @@ namespace BankingProjectAuth.Models
                                Balance = 330.030M,
                                Available = 40.20M,
                                Blocked = -50.10M,
-                               Currency = "EUR",
+                               Currency = currencies.Find(x => x.Code.Equals("EUR")),
                                AllowedOverdraft = 8000.00M,
                                UsedOverdraft = 1500.00M,
                                User = users[3]
@@ -170,7 +171,7 @@ namespace BankingProjectAuth.Models
                 {
                     accounts = context.BankingAccount.ToList();
                 }
-
+                
                 var cards = new List<Card> {
                     new Card
                     {
@@ -263,7 +264,7 @@ namespace BankingProjectAuth.Models
                         Name = "VIVACOM Monthly Recurring Charges",
                         SubscriptionNumber = "1010101010",
                         DebtDate = DateTime.Now,
-                        Ammount = 26.26M,
+                        Amount = 26.26M,
                         BankingAccount = accounts[0]
                     }
                 };

@@ -53,6 +53,7 @@ namespace BankingProjectAuth.Models
 
         public CardStatus Status { get; set; }
 
+        [Display(Name = "Banking Account")]
         public virtual BankingAccount BankingAccount { get; set; }
     }
 }
