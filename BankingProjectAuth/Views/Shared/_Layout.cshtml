@@ -26,7 +26,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BankingProjectAuth</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -36,10 +35,10 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Cards" asp-action="Index">Cards</a></li>
-                        <li><a asp-area="" asp-controller="BankingAccounts" asp-action="Index">BankingAccounts</a></li>
+                        <li><a asp-area="" asp-controller="BankingAccounts" asp-action="Index">Banking Accounts</a></li>
                         <li><a asp-area="" asp-controller="Credits" asp-action="Index">Credits</a></li>
-                        <li><a asp-area="" asp-controller="UtilityBills" asp-action="Index">UtilityBills</a></li>
-                        <li><a asp-area="" asp-controller="MoneyTransfers" asp-action="Index">MoneyTransfers</a></li>
+                        <li><a asp-area="" asp-controller="UtilityBills" asp-action="Index">Utility Bills</a></li>
+                        <li><a asp-area="" asp-controller="MoneyTransfers" asp-action="Index">Money Transfers</a></li>
                     }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

@@ -28,14 +28,17 @@
                     @Html.DisplayNameFor(model => model.Blocked)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Currency)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.AllowedOverdraft)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UsedOverdraft)
                 </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -58,13 +61,16 @@
                 @Html.DisplayFor(modelItem => item.Blocked)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Currency.Code)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.AllowedOverdraft)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UsedOverdraft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

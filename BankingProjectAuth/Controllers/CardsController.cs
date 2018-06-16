@@ -1,16 +1,16 @@
-﻿using BankingProjectAuth.Data;
-using BankingProjectAuth.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using BankingProjectAuth.Data;
+using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BankingProjectAuth.Controllers
 {
-    [Authorize]
     public class CardsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,6 +49,7 @@ namespace BankingProjectAuth.Controllers
             }
 
             var card = await _context.Card
+                .Include(c => c.BankingAccount)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (card == null)
             {
@@ -61,6 +62,7 @@ namespace BankingProjectAuth.Controllers
         // GET: Cards/Create
         public IActionResult Create()
         {
+            ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID");
             return View();
         }
 
@@ -69,7 +71,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +79,7 @@ namespace BankingProjectAuth.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", card.BankingAccountID);
             return View(card);
         }
 
@@ -93,6 +96,7 @@ namespace BankingProjectAuth.Controllers
             {
                 return NotFound();
             }
+            ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", card.BankingAccountID);
             return View(card);
         }
 
@@ -128,6 +132,7 @@ namespace BankingProjectAuth.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", card.BankingAccountID);
             return View(card);
         }
 
@@ -140,6 +145,7 @@ namespace BankingProjectAuth.Controllers
             }
 
             var card = await _context.Card
+                .Include(c => c.BankingAccount)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (card == null)
             {

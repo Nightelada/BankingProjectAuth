@@ -39,7 +39,7 @@ namespace BankingProjectAuth.Models
     {
         public int ID { get; set; }
 
-        [ForeignKey("BankingAccount")]
+        [ForeignKey("BankingAccount"), Display(Name = "Banking Account ID")]
         public int? BankingAccountID { get; set; }
 
         public UtilityBillType Type { get; set; }

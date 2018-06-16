@@ -1,15 +1,15 @@
-﻿using BankingProjectAuth.Data;
-using BankingProjectAuth.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using BankingProjectAuth.Data;
+using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace BankingProject.Models
+namespace BankingProjectAuth.Controllers
 {
     public class BankingAccountsController : Controller
     {
@@ -22,14 +22,13 @@ namespace BankingProject.Models
             _userManager = userManager;
         }
 
-        // GET: Accounts
-        [Authorize]
+        // GET: BankingAccounts
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var roles = await _userManager.GetRolesAsync(currentUser);
 
-            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(c => c.User).Include(x => x.Currency);
+            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(b => b.Currency).Include(b => b.User);
 
             if (!roles.Contains("Administrator"))
             {
@@ -41,8 +40,7 @@ namespace BankingProject.Models
             }
         }
 
-        // GET: Accounts/Details/5
-        [Authorize(Roles = "Administrator")]
+        // GET: BankingAccounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,48 +48,47 @@ namespace BankingProject.Models
                 return NotFound();
             }
 
-            var account = await _context.BankingAccount
+            var bankingAccount = await _context.BankingAccount
+                .Include(b => b.Currency)
+                .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (account == null)
+            if (bankingAccount == null)
             {
                 return NotFound();
             }
 
-            return View(account);
+            return View(bankingAccount);
         }
 
-        // GET: Accounts/Create
-        [Authorize]
+        // GET: BankingAccounts/Create
         public async Task<IActionResult> Create()
         {
-            IQueryable<Currency> currencyQuery = from m in _context.Currency
-                                                 orderby m.Code
-                                                 select m;
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            var vm = new BankingAccountCurrencyViewModel();
-            vm.currencies = new SelectList(await currencyQuery.ToListAsync(),"ID", "CurrencyInfo");
-
-            return View(vm);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo");
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "UserName", currentUser.Id);
+            return View();
         }
 
-        // POST: Accounts/Create
+        // POST: BankingAccounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BankingAccountCurrencyViewModel accountViewModel)
+        public async Task<IActionResult> Create([Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,CurrencyID,AllowedOverdraft,UsedOverdraft")] BankingAccount bankingAccount)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(accountViewModel.account);
+                _context.Add(bankingAccount);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(accountViewModel.account);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", bankingAccount.CurrencyID);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "UserName", bankingAccount.UserID);
+            return View(bankingAccount);
         }
 
-        // GET: Accounts/Edit/5
-        [Authorize]
+        // GET: BankingAccounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -99,23 +96,24 @@ namespace BankingProject.Models
                 return NotFound();
             }
 
-            var account = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
-            if (account == null)
+            var bankingAccount = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
+            if (bankingAccount == null)
             {
                 return NotFound();
             }
-            return View(account);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", bankingAccount.CurrencyID);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "UserName", bankingAccount.UserID);
+            return View(bankingAccount);
         }
 
-        // POST: Accounts/Edit/5
+        // POST: BankingAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,Currency,AllowedOverdraft,UsedOverdraft")] BankingAccount account)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,CurrencyID,AllowedOverdraft,UsedOverdraft")] BankingAccount bankingAccount)
         {
-            if (id != account.ID)
+            if (id != bankingAccount.ID)
             {
                 return NotFound();
             }
@@ -124,12 +122,12 @@ namespace BankingProject.Models
             {
                 try
                 {
-                    _context.Update(account);
+                    _context.Update(bankingAccount);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AccountExists(account.ID))
+                    if (!BankingAccountExists(bankingAccount.ID))
                     {
                         return NotFound();
                     }
@@ -140,11 +138,12 @@ namespace BankingProject.Models
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(account);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", bankingAccount.CurrencyID);
+            ViewData["UserID"] = new SelectList(_context.User, "Id", "UserName", bankingAccount.UserID);
+            return View(bankingAccount);
         }
 
-        // GET: Accounts/Delete/5
-        [Authorize]
+        // GET: BankingAccounts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,29 +151,30 @@ namespace BankingProject.Models
                 return NotFound();
             }
 
-            var account = await _context.BankingAccount
+            var bankingAccount = await _context.BankingAccount
+                .Include(b => b.Currency)
+                .Include(b => b.User)
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (account == null)
+            if (bankingAccount == null)
             {
                 return NotFound();
             }
 
-            return View(account);
+            return View(bankingAccount);
         }
 
-        // POST: Accounts/Delete/5
+        // POST: BankingAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var account = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
-            _context.BankingAccount.Remove(account);
+            var bankingAccount = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);
+            _context.BankingAccount.Remove(bankingAccount);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AccountExists(int id)
+        private bool BankingAccountExists(int id)
         {
             return _context.BankingAccount.Any(e => e.ID == id);
         }

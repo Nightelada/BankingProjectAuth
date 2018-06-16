@@ -23,9 +23,8 @@ namespace BankingProjectAuth.Models
     {
         public int ID { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("User"), Display(Name = "User ID")]
         public string UserID { get; set; }
-        public virtual ApplicationUser User { get; set; }
 
         [Display(Name = "Account Type")]
         public AccountType AccountType { get; set; }
@@ -42,15 +41,17 @@ namespace BankingProjectAuth.Models
         [Column(TypeName = "money")]
         public decimal Blocked { get; set; }
 
-        [ForeignKey("Currency")]
+        [ForeignKey("Currency"), Display(Name = "Currency ID")]
         public int? CurrencyID { get; set; }
-        public Currency Currency { get; set; }
 
         [Display(Name = "Allowed Overdraft"), Column(TypeName = "money")]
         public decimal AllowedOverdraft { get; set; }
 
         [Display(Name = "Used Overdraft"), Column(TypeName = "money")]
         public decimal UsedOverdraft { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+        public virtual Currency Currency { get; set; }
 
         public virtual ICollection<Card> Cards { get; set; }
         public virtual ICollection<Credit> Credits { get; set; }

@@ -17,12 +17,6 @@
             @Html.DisplayFor(model => model.Type)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.RecipientName)
         </dt>
         <dd>
@@ -75,6 +69,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.BankingAccount.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Currency.Code)
         </dd>
     </dl>
 </div>

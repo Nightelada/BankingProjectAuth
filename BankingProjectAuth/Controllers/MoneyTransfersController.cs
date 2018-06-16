@@ -7,23 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BankingProjectAuth.Controllers
 {
     public class MoneyTransfersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MoneyTransfersController(ApplicationDbContext context)
+        public MoneyTransfersController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: MoneyTransfers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.MoneyTransfer.Include(m => m.BankingAccount);
-            return View(await applicationDbContext.ToListAsync());
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var roles = await _userManager.GetRolesAsync(currentUser);
+
+            IEnumerable<MoneyTransfer> moneyTransfers = _context.MoneyTransfer.Include(m => m.BankingAccount).Include(m => m.Currency); ;
+
+            if (!roles.Contains("Administrator"))
+            {
+                return View(moneyTransfers.Where(g => g.BankingAccount.UserID.Equals(currentUser.Id)));
+            }
+            else
+            {
+                return View(moneyTransfers);
+            }
         }
 
         // GET: MoneyTransfers/Details/5
@@ -36,6 +50,7 @@ namespace BankingProjectAuth.Controllers
 
             var moneyTransfer = await _context.MoneyTransfer
                 .Include(m => m.BankingAccount)
+                .Include(m => m.Currency)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (moneyTransfer == null)
             {
@@ -49,6 +64,7 @@ namespace BankingProjectAuth.Controllers
         public IActionResult Create()
         {
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID");
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo");
             return View();
         }
 
@@ -57,7 +73,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,Currency,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
+        public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,CurrencyID,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +82,7 @@ namespace BankingProjectAuth.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", moneyTransfer.BankingAccountID);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", moneyTransfer.CurrencyID);
             return View(moneyTransfer);
         }
 
@@ -83,6 +100,7 @@ namespace BankingProjectAuth.Controllers
                 return NotFound();
             }
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", moneyTransfer.BankingAccountID);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", moneyTransfer.CurrencyID);
             return View(moneyTransfer);
         }
 
@@ -91,7 +109,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,Currency,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,CurrencyID,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
         {
             if (id != moneyTransfer.ID)
             {
@@ -119,6 +137,7 @@ namespace BankingProjectAuth.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID", moneyTransfer.BankingAccountID);
+            ViewData["CurrencyID"] = new SelectList(_context.Currency, "ID", "CurrencyInfo", moneyTransfer.CurrencyID);
             return View(moneyTransfer);
         }
 
@@ -132,6 +151,7 @@ namespace BankingProjectAuth.Controllers
 
             var moneyTransfer = await _context.MoneyTransfer
                 .Include(m => m.BankingAccount)
+                .Include(m => m.Currency)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (moneyTransfer == null)
             {

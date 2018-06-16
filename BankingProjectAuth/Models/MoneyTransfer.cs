@@ -23,12 +23,13 @@ namespace BankingProjectAuth.Models
     {
         public int ID { get; set; }
 
-        [ForeignKey("BankingAccount")]
+        [ForeignKey("BankingAccount"), Display(Name = "Banking Account ID")]
         public int? BankingAccountID { get; set; }
 
         public TransferType Type { get; set; }
 
-        public string Currency { get; set; }
+        [ForeignKey("Currency"), Display(Name = "Currency")]
+        public int? CurrencyID { get; set; }
 
         [Display(Name = "Recipient Name"), StringLength(255, MinimumLength = 3)]
         public string RecipientName { get; set; }
@@ -54,8 +55,10 @@ namespace BankingProjectAuth.Models
         [Display(Name = "Date of Transfer")]
         public DateTime TransferDate { get; set; }
 
+        [Display(Name = "Currency")]
+        public virtual Currency Currency { get; set; }
+
         [Display(Name = "Banking Account")]
         public virtual BankingAccount BankingAccount { get; set; }
-
     }
 }

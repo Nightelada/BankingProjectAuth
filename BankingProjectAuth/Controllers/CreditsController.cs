@@ -7,23 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BankingProjectAuth.Controllers
 {
     public class CreditsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CreditsController(ApplicationDbContext context)
+        public CreditsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Credits
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Credit.Include(c => c.BankingAccount);
-            return View(await applicationDbContext.ToListAsync());
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var roles = await _userManager.GetRolesAsync(currentUser);
+
+            IEnumerable<Credit> credits = _context.Credit.Include(c => c.BankingAccount);
+
+            if (!roles.Contains("Administrator"))
+            {
+                return View(credits.Where(g => g.BankingAccount.UserID.Equals(currentUser.Id)));
+            }
+            else
+            {
+                return View(credits);
+            }
         }
 
         // GET: Credits/Details/5

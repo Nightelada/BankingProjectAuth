@@ -7,23 +7,38 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BankingProjectAuth.Controllers
 {
     public class UtilityBillsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UtilityBillsController(ApplicationDbContext context)
+        public UtilityBillsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
 
         // GET: UtilityBills
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UtilityBill.Include(u => u.BankingAccount);
-            return View(await applicationDbContext.ToListAsync());
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var roles = await _userManager.GetRolesAsync(currentUser);
+
+            IEnumerable<UtilityBill> utilityBills = _context.UtilityBill.Include(u => u.BankingAccount);
+
+            if (!roles.Contains("Administrator"))
+            {
+                return View(utilityBills.Where(g => g.BankingAccount.UserID.Equals(currentUser.Id)));
+            }
+            else
+            {
+                return View(utilityBills);
+            }
         }
 
         // GET: UtilityBills/Details/5

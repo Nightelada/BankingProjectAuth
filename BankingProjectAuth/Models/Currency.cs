@@ -15,6 +15,7 @@ namespace BankingProjectAuth.Models
         [StringLength(20)]
         public string Code { get; set; }
 
+        [Display(Name = "Currency Info")]
         public virtual string CurrencyInfo => $"{Code} - {Name} | {Country}";
     }
 }
