@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using BankingProjectAuth.Models.BankingAccountViewModels;
 
 namespace BankingProjectAuth.Controllers
 {
+    [Authorize]
     public class BankingAccountsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +23,19 @@ namespace BankingProjectAuth.Controllers
         {
             _context = context;
             _userManager = userManager;
+        }
+
+        // GET: BankingAccounts
+        public async Task<IActionResult> Test()
+        {
+            TestViewModel tvm = new TestViewModel();
+
+            BankingAccount bankingAccount = _context.BankingAccount.Include(b => b.Currency).Include(b => b.User).Include(b =>b.Cards).FirstOrDefault();
+            tvm.bAccount = bankingAccount;
+            tvm.Cards = bankingAccount.Cards;
+
+            return View(tvm);
+
         }
 
         // GET: BankingAccounts

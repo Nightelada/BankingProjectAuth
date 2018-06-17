@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BankingProjectAuth.Data;
 using BankingProjectAuth.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankingProjectAuth.Controllers
 {
+    [Authorize]
     public class UtilityBillsController : Controller
     {
         private readonly ApplicationDbContext _context;

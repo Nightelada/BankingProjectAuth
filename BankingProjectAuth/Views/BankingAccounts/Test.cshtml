@@ -1,0 +1,97 @@
+﻿@model BankingProjectAuth.Models.BankingAccountViewModels.TestViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Test</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.IBAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.Blocked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.AllowedOverdraft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.UsedOverdraft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bAccount.User)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.AccountType)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.IBAN)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.Blocked)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.AllowedOverdraft)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.UsedOverdraft)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.Currency.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.bAccount.User.UserName)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Cards</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Was ist das?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cards)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankingAccount)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
