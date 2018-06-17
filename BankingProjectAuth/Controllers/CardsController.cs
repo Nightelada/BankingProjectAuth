@@ -73,7 +73,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,Provider,Number,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,Provider,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,Provider,Number,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (id != card.ID)
             {

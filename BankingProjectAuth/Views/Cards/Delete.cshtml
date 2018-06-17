@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.Provider)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GetViewableCardNumber)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.CardHolder)
         </dt>
         <dd>
@@ -57,13 +63,13 @@
             @Html.DisplayNameFor(model => model.BankingAccount)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BankingAccount.ID)
+            @Html.DisplayFor(model => model.BankingAccountID)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Back to Cards Overview</a>
     </form>
 </div>

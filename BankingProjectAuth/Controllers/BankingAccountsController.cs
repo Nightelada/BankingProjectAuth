@@ -29,10 +29,16 @@ namespace BankingProjectAuth.Controllers
         public async Task<IActionResult> Test()
         {
             TestViewModel tvm = new TestViewModel();
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            BankingAccount bankingAccount = _context.BankingAccount.Include(b => b.Currency).Include(b => b.User).Include(b =>b.Cards).FirstOrDefault();
-            tvm.bAccount = bankingAccount;
-            tvm.Cards = bankingAccount.Cards;
+            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(b => b.Currency)
+                .Include(b => b.User)
+                .Include(b => b.Cards);
+
+            IEnumerable<Card> cards = _context.Card.ToList();
+
+            tvm.Accounts = bankingAccounts;
+            tvm.Cards = cards;
 
             return View(tvm);
 

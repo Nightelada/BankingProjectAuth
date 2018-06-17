@@ -39,6 +39,11 @@ namespace BankingProjectAuth.Models
 
         public CardProvider Provider { get; set; }
 
+        [Display(Name = "Card Number")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Card number must only contain digits")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage = "Card number must containt 16 digits")]
+        public string Number { get; set; }
+
         [Display(Name = "Cardholder"), StringLength(100, MinimumLength = 3)]
         public string CardHolder { get; set; }
 
@@ -55,5 +60,7 @@ namespace BankingProjectAuth.Models
 
         [Display(Name = "Banking Account")]
         public virtual BankingAccount BankingAccount { get; set; }
+
+        public virtual string GetViewableCardNumber => $"{Number.Substring(0,2)}**-****-****-{Number.Substring(12,4)}";
     }
 }
