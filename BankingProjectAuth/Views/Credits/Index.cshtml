@@ -3,123 +3,204 @@
 @{
     ViewData["Title"] = "Credits";
 }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util3.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main3.css">
+    <!--===============================================================================================-->
+</head>
 
-<h2>Index</h2>
+<br />
+
+<h2>Credits</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalPrincipal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OwedPrincipal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OverduePrincipal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.InterestRate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalInterest)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OwedInterest)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OverdueInterest)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.InstallmentAmmount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NextInstallment)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastInstallment)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalTaxes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OwedTaxes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OverdueTaxes)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BankingAccount)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrincipal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwedPrincipal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OverduePrincipal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InterestRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalInterest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwedInterest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OverdueInterest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstallmentAmmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NextInstallment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastInstallment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalTaxes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwedTaxes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OverdueTaxes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankingAccount.ID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<br />
+
+<div class="wrap-table100">
+    <div class="table100 ver1">
+        <div class="table100-firstcol">
+            <table>
+                <thead>
+                    <tr class="row100 head">
+                        <th class="cell100 column1">
+                            @Html.DisplayNameFor(model => model.Type)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="row100 body">
+                            <td class="cell100 column1">
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="wrap-table100-nextcols js-pscroll ps ps--active-x">
+            <div class="table100-nextcols">
+                <table>
+                    <thead>
+                        <tr class="row100 head">
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.Duration)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.TotalPrincipal)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OwedPrincipal)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OverduePrincipal)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.InterestRate)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.TotalInterest)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OwedInterest)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OverdueInterest)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.InstallmentAmmount)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.NextInstallment)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.LastInstallment)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.TotalTaxes)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OwedTaxes)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.OverdueTaxes)
+                            </th>
+                            <th class="cell100 column2">
+                                @Html.DisplayNameFor(model => model.BankingAccount)
+                            </th>
+                            <th class="cell100 column2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="row100 body">
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.Duration)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.TotalPrincipal)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OwedPrincipal)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OverduePrincipal)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.InterestRate)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.TotalInterest)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OwedInterest)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OverdueInterest)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.InstallmentAmmount)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.NextInstallment)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.LastInstallment)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.TotalTaxes)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OwedTaxes)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.OverdueTaxes)
+                                </td>
+                                <td class="cell100 column2">
+                                    @Html.DisplayFor(modelItem => item.BankingAccount.ID)
+                                </td>
+                                <td class="cell100 column2">
+                                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/bootstrap/js/popper.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
+    $('.js-pscroll').each(function () {
+        var ps = new PerfectScrollbar(this);
+
+        $(window).on('resize', function () {
+            ps.update();
+        })
+
+        $(this).on('ps-x-reach-start', function () {
+            $(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
+        });
+
+        $(this).on('ps-scroll-x', function () {
+            $(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
+        });
+
+    });
+
+
+
+
+</script>
+<!--===============================================================================================-->
+<script src="~/js/main3.js"></script>

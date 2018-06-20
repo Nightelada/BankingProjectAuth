@@ -4,92 +4,131 @@
     ViewData["Title"] = "Money Transfers";
 }
 
-<h2>Index</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main2.css">
+    <!--===============================================================================================-->
+</head>
+
+<br />
+
+<h2>Money Transfers</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipientName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipientIBAN)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipientCountry)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipientAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reason)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AdditionalReason)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Amount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TransferDate)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BankingAccount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Currency)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipientIBAN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipientCountry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipientAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdditionalReason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransferDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankingAccount.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency.Code)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<br />
+
+
+<div class="wrap-table100">
+    <div class="table100">
+        <table>
+            <thead>
+                <tr class="table100-head">
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.RecipientName)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.RecipientIBAN)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.RecipientCountry)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.RecipientAddress)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Reason)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.AdditionalReason)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.TransferDate)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.BankingAccount)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Currency)
+                    </th>
+                    <th class="column1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.RecipientName)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.RecipientIBAN)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.RecipientCountry)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.RecipientAddress)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Reason)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.AdditionalReason)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.TransferDate)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.BankingAccount.ID)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Currency.Code)
+                        </td>
+                        <td class="column1">
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--===============================================================================================-->
+<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/bootstrap/js/popper.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/js/main2.js"></script>

@@ -4,83 +4,122 @@
     ViewData["Title"] = "Banking Accounts";
 }
 
-<h2>Index</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main2.css">
+    <!--===============================================================================================-->
+</head>
+
+<br />
+<h2>Banking Accounts</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
-    <br/>
+    <br />
     <a asp-action="Test">Beta Test</a>
 
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.AccountType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IBAN)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Balance)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Available)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Blocked)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AllowedOverdraft)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UsedOverdraft)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Currency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IBAN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Balance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Available)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Blocked)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllowedOverdraft)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsedOverdraft)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</p
+><br />
+
+
+<div class="wrap-table100">
+    <div class="table100">
+        <table>
+            <thead>
+                <tr class="table100-head">
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.AccountType)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.IBAN)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Balance)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Available)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Blocked)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.AllowedOverdraft)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.UsedOverdraft)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Currency)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th class="column1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.AccountType)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.IBAN)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Available)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Blocked)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.AllowedOverdraft)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.UsedOverdraft)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Currency.Code)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td class="column1">
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/bootstrap/js/popper.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/js/main2.js"></script>
