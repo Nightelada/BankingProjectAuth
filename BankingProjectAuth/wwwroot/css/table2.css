@@ -1,0 +1,93 @@
+﻿
+
+@media screen and (max-width: 580px) {
+    body {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+.wrapper2 {
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 800px;
+}
+
+.table2 {
+    margin: 0 0 40px 0;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: table;
+}
+
+@media screen and (max-width: 580px) {
+    .table2 {
+        display: block;
+    }
+}
+
+.row2 {
+    background: #f6f6f6;
+}
+
+    .row2:nth-of-type(odd) {
+        background: #e9e9e9;
+    }
+
+    .row2.header2 {
+        font-weight: 900;
+        color: #ffffff;
+        background: #C22344;
+    }
+
+    .row2.green {
+        background: #1DA664;
+    }
+
+    .row2.blue {
+        background: #2F1594;
+    }
+
+@media screen and (max-width: 580px) {
+    .row2 {
+        padding: 14px 0 7px;
+        display: block;
+    }
+
+        .row2.header2 {
+            padding: 0;
+            height: 6px;
+        }
+
+            .row2.header2 .cell2 {
+                display: none;
+            }
+
+        .row2 .cell2 {
+            margin-bottom: 10px;
+        }
+
+            .row2 .cell2:before {
+                margin-bottom: 3px;
+                content: attr(data-title);
+                min-width: 98px;
+                font-size: 10px;
+                line-height: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #969696;
+                display: block;
+            }
+}
+
+.cell2 {
+    padding: 6px 12px;
+    display: table-cell;
+}
+
+@media screen and (max-width: 580px) {
+    .cell2 {
+        padding: 2px 16px;
+        display: block;
+    }
+}

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BankingProjectAuth</title>
 
+    <link rel="stylesheet" href="~/css/footer-distributed.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -48,10 +51,26 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2018 - BankingProjectAuth</p>
-        </footer>
     </div>
+
+    <footer class="footer-distributed">
+        <div class="footer-right">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+        </div>
+        <div class="footer-left">
+            <p class="footer-links">
+                <a asp-area="" class="footer-links" asp-controller="Home" asp-action="Index">Home</a>
+                ·
+                <a asp-area="" class="footer-links" asp-controller="Home" asp-action="About">About</a>
+                ·
+                <a asp-area="" class="footer-links" asp-controller="Home" asp-action="Contact">Contact</a>
+            </p>
+            <p>Banking Project &copy; 2018</p>
+        </div>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

@@ -4,166 +4,178 @@
     ViewData["Title"] = "Index";
 }
 
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/table2.css">
+
+</head>
 <h2>Test</h2>
 
 <p>
     <a asp-action="Index">Stable Release</a>
 </p>
-<table class="table">
+<div class="wrapper2">
     <h3>Banking Accounts</h3>
-    @foreach (var item in Model.Accounts)
-    {
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Account @item.ID
-                </th>
-                <th colspan="2">
-                    Funds
-                </th>
-                <th colspan="2">
-                    Overdraft
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.AccountType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AccountType)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.Balance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Balance)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.AllowedOverdraft)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AllowedOverdraft)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.IBAN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IBAN)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.Available)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Available)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.UsedOverdraft)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UsedOverdraft)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.Currency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Currency.Code)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingeAccount.Blocked)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Blocked)
-                </td>
-            </tr>
-        </tbody>
-    }
-</table>
 
-<h3>Cards</h3>
+    <table class="table2">
+        @foreach (var item in Model.Accounts)
+        {
+            <thead class="row2 header2">
+                <tr>
+                    <th colspan="2" class="cell2">
+                        Account @item.ID
+                    </th>
+                    <th colspan="2" class="cell2">
+                        Funds
+                    </th>
+                    <th colspan="2" class="cell2">
+                        Overdraft
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.AccountType)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.AccountType)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.Balance)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.AllowedOverdraft)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.AllowedOverdraft)
+                    </td>
+                </tr>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.IBAN)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.IBAN)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.Available)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.Available)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.UsedOverdraft)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.UsedOverdraft)
+                    </td>
+                </tr>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.Currency)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.Currency.Code)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingeAccount.Blocked)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => item.Blocked)
+                    </td>
+                    <td class="cell2">
+                    </td>
+                    <td class="cell2">
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+<div class="wrapper2">
+    <h3 style="margin-top:-5%">Cards</h3>
 
-<table class="table">
-    @foreach (var card in Model.Cards)
-    {
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Card @card.ID
-                </th>
-                <th colspan="2">
-                    Limits
-                </th>
-                <th colspan="2">
-                    Info
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.Type)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.DailyLimit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.DailyLimit)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.BankingAccountID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.BankingAccountID)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.Provider)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.Provider)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.MontlyLimit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.MontlyLimit)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.CardHolder)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.CardHolder)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.Number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.GetViewableCardNumber)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.POSLimit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.POSLimit)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => model.SingleCard.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => card.Status)
-                </td>
-            </tr>
-        </tbody>
-    }
-</table>
+    <table class="table2">
+        @foreach (var card in Model.Cards)
+        {
+            <thead class="row2 green header2">
+                <tr>
+                    <th colspan="2" class="cell2">
+                        Card @card.ID
+                    </th>
+                    <th colspan="2" class="cell2">
+                        Limits
+                    </th>
+                    <th colspan="2" class="cell2">
+                        Info
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.Type)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.Type)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.DailyLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.DailyLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.BankingAccountID)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.BankingAccountID)
+                    </td>
+                </tr>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.Provider)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.Provider)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.MontlyLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.MontlyLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.CardHolder)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.CardHolder)
+                    </td>
+                </tr>
+                <tr class="row2">
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.Number)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.GetViewableCardNumber)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.POSLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.POSLimit)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayNameFor(model => model.SingleCard.Status)
+                    </td>
+                    <td class="cell2">
+                        @Html.DisplayFor(modelItem => card.Status)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

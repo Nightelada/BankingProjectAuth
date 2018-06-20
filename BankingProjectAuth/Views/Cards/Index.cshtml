@@ -4,81 +4,121 @@
     ViewData["Title"] = "Cards";
 }
 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util2.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main2.css">
+    <!--===============================================================================================-->
+</head>
+
+<br />
 <h2>Cards Overview</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Provider)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Number)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CardHolder)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DailyLimit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MontlyLimit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.POSLimit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BankingAccount)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provider)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GetViewableCardNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CardHolder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DailyLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MontlyLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.POSLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankingAccountID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-                @Html.ActionLink("Banking Accounts", "Details", "BankingAccounts", new { id = item.BankingAccountID } , null)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<br />
+
+
+<div class="wrap-table100">
+    <div class="table100">
+        <table>
+            <thead>
+                <tr class="table100-head">
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Provider)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Number)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.CardHolder)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.DailyLimit)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.MontlyLimit)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.POSLimit)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th class="column1">
+                        @Html.DisplayNameFor(model => model.BankingAccount)
+                    </th>
+                    <th class="column1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Provider)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.GetViewableCardNumber)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.CardHolder)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.DailyLimit)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.MontlyLimit)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.POSLimit)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td class="column1">
+                            @Html.DisplayFor(modelItem => item.BankingAccountID)
+                        </td>
+                        <td class="column1">
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                            @Html.ActionLink("Banking Accounts", "Details", "BankingAccounts", new { id = item.BankingAccountID }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/bootstrap/js/popper.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="~/js/main2.js"></script>
