@@ -7,10 +7,9 @@ namespace BankingProjectAuth.Models.BankingAccountViewModels
 {
     public class TestViewModel
     {
-        public IEnumerable<BankingAccount> Accounts { get; set; }
+        public IEnumerable<BankingAccount> BankingAccounts { get; set; }
         public IEnumerable<Card> Cards { get; set; }
-        public BankingAccount SingeAccount { get; set; }
-        public Card SingleCard { get; set; }
+        public IEnumerable<Credit> Credits { get; set; }
 
     }
 }

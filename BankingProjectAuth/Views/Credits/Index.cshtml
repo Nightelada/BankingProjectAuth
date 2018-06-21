@@ -25,10 +25,12 @@
 <br />
 
 <h2>Credits</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <br />
 
 <div class="wrap-table100">
@@ -85,7 +87,7 @@
                                 @Html.DisplayNameFor(model => model.OverdueInterest)
                             </th>
                             <th class="cell100 column2">
-                                @Html.DisplayNameFor(model => model.InstallmentAmmount)
+                                @Html.DisplayNameFor(model => model.InstallmentAmount)
                             </th>
                             <th class="cell100 column2">
                                 @Html.DisplayNameFor(model => model.NextInstallment)
@@ -105,64 +107,70 @@
                             <th class="cell100 column2">
                                 @Html.DisplayNameFor(model => model.BankingAccount)
                             </th>
-                            <th class="cell100 column2"></th>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                            {
+                                <th class="cell100 column2"></th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr class="row100 body">
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.Duration)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.TotalPrincipal)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OwedPrincipal)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OverduePrincipal)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.InterestRate)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.TotalInterest)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OwedInterest)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OverdueInterest)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.InstallmentAmmount)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.NextInstallment)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.LastInstallment)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.TotalTaxes)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OwedTaxes)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.OverdueTaxes)
-                                </td>
-                                <td class="cell100 column2">
-                                    @Html.DisplayFor(modelItem => item.BankingAccount.ID)
-                                </td>
-                                <td class="cell100 column2">
-                                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                                </td>
-                            </tr>
+                        <tr class="row100 body">
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.TotalPrincipal)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OwedPrincipal)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OverduePrincipal)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.InterestRate)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.TotalInterest)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OwedInterest)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OverdueInterest)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.InstallmentAmount)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.NextInstallment)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.LastInstallment)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.TotalTaxes)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OwedTaxes)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.OverdueTaxes)
+                            </td>
+                            <td class="cell100 column2">
+                                @Html.DisplayFor(modelItem => item.BankingAccount.ID)
+                            </td>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                            {
+                            <td class="cell100 column2">
+                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            </td>
+                            }
+                        </tr>
                         }
                     </tbody>
                 </table>

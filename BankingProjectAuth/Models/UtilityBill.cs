@@ -52,6 +52,7 @@ namespace BankingProjectAuth.Models
         [Display(Name = "Subscription Number"), StringLength(50)]
         public string SubscriptionNumber { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Debt Date")]
         public DateTime DebtDate { get; set; }
 

@@ -10,6 +10,8 @@ using BankingProjectAuth.Data;
 using Microsoft.AspNetCore.Identity;
 using BankingProjectAuth.Models.BankingAccountViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace BankingProjectAuth.Controllers
 {
@@ -18,11 +20,13 @@ namespace BankingProjectAuth.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ILogger<HomeController> logger)
         {
             _context = context;
             _userManager = userManager;
+            _logger = logger;
         }
 
         [Authorize]
@@ -33,12 +37,15 @@ namespace BankingProjectAuth.Controllers
 
             IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(b => b.Currency)
                 .Include(b => b.User)
-                .Include(b => b.Cards);
+                .Include(b => b.Cards)
+                .Where(b => b.UserID == currentUser.Id);
 
-            IEnumerable<Card> cards = _context.Card.ToList();
+            IEnumerable<Card> cards = _context.Card.Where(c => c.BankingAccount.UserID == currentUser.Id).ToList();
+            IEnumerable<Credit> credits = _context.Credit.Where(c => c.BankingAccount.UserID == currentUser.Id).ToList();
 
-            tvm.Accounts = bankingAccounts;
+            tvm.BankingAccounts = bankingAccounts;
             tvm.Cards = cards;
+            tvm.Credits = credits;
 
             return View(tvm);
 
@@ -58,9 +65,12 @@ namespace BankingProjectAuth.Controllers
             return View();
         }
 
-        public IActionResult Error()
+        [HttpGet("/Home/Error/{statusCode}")]
+        public IActionResult Error(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var reExecute = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+            _logger.LogInformation($"Unexpected Status Code: {statusCode}, OriginalPath: {reExecute.OriginalPath}");
+            return View(statusCode);
         }
     }
 }

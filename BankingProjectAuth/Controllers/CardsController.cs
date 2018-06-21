@@ -62,6 +62,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: Cards/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID");
@@ -73,6 +74,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,Provider,Number,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (ModelState.IsValid)
@@ -86,6 +88,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: Cards/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +110,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,Provider,Number,CardHolder,DailyLimit,MontlyLimit,POSLimit,Status")] Card card)
         {
             if (id != card.ID)
@@ -139,6 +143,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: Cards/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,6 +165,7 @@ namespace BankingProjectAuth.Controllers
         // POST: Cards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var card = await _context.Card.SingleOrDefaultAsync(m => m.ID == id);

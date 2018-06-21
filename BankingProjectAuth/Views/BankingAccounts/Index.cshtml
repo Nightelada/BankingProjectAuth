@@ -26,54 +26,56 @@
 
 <br />
 <h2>Banking Accounts</h2>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-    <br />
-    <a asp-action="Test">Beta Test</a>
 
-</p
-><br />
-
-
-<div class="wrap-table100">
-    <div class="table100">
-        <table>
-            <thead>
-                <tr class="table100-head">
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.AccountType)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.IBAN)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.Balance)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.Available)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.Blocked)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.AllowedOverdraft)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.UsedOverdraft)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.Currency)
-                    </th>
-                    <th class="column1">
-                        @Html.DisplayNameFor(model => model.User)
-                    </th>
-                    <th class="column1"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <div class="wrap-table100">
+        <div class="table100">
+            <table>
+                <thead>
+                    <tr class="table100-head">
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.AccountType)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.IBAN)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.Balance)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.Available)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.Blocked)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.AllowedOverdraft)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.UsedOverdraft)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.Currency)
+                        </th>
+                        <th class="column1">
+                            @Html.DisplayNameFor(model => model.User)
+                        </th>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <th class="column1"></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                     <tr>
                         <td class="column1">
                             @Html.DisplayFor(modelItem => item.AccountType)
@@ -102,24 +104,27 @@
                         <td class="column1">
                             @Html.DisplayFor(modelItem => item.User.UserName)
                         </td>
-                        <td class="column1">
-                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                        </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <td class="column1">
+                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            </td>
+                        }
                     </tr>
-                }
-            </tbody>
-        </table>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<!--===============================================================================================-->
-<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/bootstrap/js/popper.js"></script>
-<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/js/main2.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/main2.js"></script>

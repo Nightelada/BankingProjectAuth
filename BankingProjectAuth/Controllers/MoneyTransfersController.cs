@@ -63,6 +63,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: MoneyTransfers/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BankingAccountID"] = new SelectList(_context.BankingAccount, "ID", "ID");
@@ -75,6 +76,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("ID,BankingAccountID,Type,CurrencyID,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
         {
             if (ModelState.IsValid)
@@ -89,6 +91,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: MoneyTransfers/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -111,6 +114,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,BankingAccountID,Type,CurrencyID,RecipientName,RecipientIBAN,RecipientCountry,RecipientAddress,Reason,AdditionalReason,Amount,TransferDate")] MoneyTransfer moneyTransfer)
         {
             if (id != moneyTransfer.ID)
@@ -144,6 +148,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: MoneyTransfers/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,6 +171,7 @@ namespace BankingProjectAuth.Controllers
         // POST: MoneyTransfers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var moneyTransfer = await _context.MoneyTransfer.SingleOrDefaultAsync(m => m.ID == id);

@@ -27,10 +27,12 @@
 <br />
 
 <h2>Money Transfers</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <br />
 
 
@@ -72,52 +74,58 @@
                     <th class="column1">
                         @Html.DisplayNameFor(model => model.Currency)
                     </th>
-                    <th class="column1"></th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
+                        <th class="column1"></th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.RecipientName)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.RecipientIBAN)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.RecipientCountry)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.RecipientAddress)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Reason)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.AdditionalReason)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Amount)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.TransferDate)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.BankingAccount.ID)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Currency.Code)
-                        </td>
+                <tr>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.RecipientName)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.RecipientIBAN)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.RecipientCountry)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.RecipientAddress)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.AdditionalReason)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.TransferDate)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.BankingAccount.ID)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Currency.Code)
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
                         <td class="column1">
                             <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                             <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                         </td>
-                    </tr>
+                    }
+                </tr>
                 }
             </tbody>
         </table>

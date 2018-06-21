@@ -23,7 +23,7 @@ namespace BankingProjectAuth.Models
         [Display(Name = "Short-Term")]
         ShortTerm,
         [Display(Name = "Mid-Term")]
-        MedTerm,
+        MidTerm,
         [Display(Name = "Long-Term")]
         LongTerm
     }
@@ -60,12 +60,14 @@ namespace BankingProjectAuth.Models
         [Display(Name = "Overdue Interest"), Column(TypeName = "money")]
         public decimal OverdueInterest { get; set; }
 
-        [Display(Name = "Installment Ammount"), Column(TypeName = "money")]
-        public decimal InstallmentAmmount { get; set; }
+        [Display(Name = "Installment Amount"), Column(TypeName = "money")]
+        public decimal InstallmentAmount { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Next Installment")]
         public DateTime NextInstallment { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Last Installment")]
         public DateTime LastInstallment { get; set; }
 

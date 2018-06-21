@@ -24,25 +24,7 @@ namespace BankingProjectAuth.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-        // GET: BankingAccounts
-        public async Task<IActionResult> Test()
-        {
-            TestViewModel tvm = new TestViewModel();
-            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-
-            IEnumerable<BankingAccount> bankingAccounts = _context.BankingAccount.Include(b => b.Currency)
-                .Include(b => b.User)
-                .Include(b => b.Cards);
-
-            IEnumerable<Card> cards = _context.Card.ToList();
-
-            tvm.Accounts = bankingAccounts;
-            tvm.Cards = cards;
-
-            return View(tvm);
-
-        }
+        
 
         // GET: BankingAccounts
         public async Task<IActionResult> Index()
@@ -83,6 +65,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: BankingAccounts/Create
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -97,6 +80,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,CurrencyID,AllowedOverdraft,UsedOverdraft")] BankingAccount bankingAccount)
         {
             if (ModelState.IsValid)
@@ -111,6 +95,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: BankingAccounts/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -133,6 +118,7 @@ namespace BankingProjectAuth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,AccountType,IBAN,Balance,Available,Blocked,CurrencyID,AllowedOverdraft,UsedOverdraft")] BankingAccount bankingAccount)
         {
             if (id != bankingAccount.ID)
@@ -166,6 +152,7 @@ namespace BankingProjectAuth.Controllers
         }
 
         // GET: BankingAccounts/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -188,6 +175,7 @@ namespace BankingProjectAuth.Controllers
         // POST: BankingAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bankingAccount = await _context.BankingAccount.SingleOrDefaultAsync(m => m.ID == id);

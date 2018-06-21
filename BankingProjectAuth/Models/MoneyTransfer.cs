@@ -52,6 +52,7 @@ namespace BankingProjectAuth.Models
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date of Transfer")]
         public DateTime TransferDate { get; set; }
 

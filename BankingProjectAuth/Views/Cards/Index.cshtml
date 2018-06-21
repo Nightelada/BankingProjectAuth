@@ -27,10 +27,12 @@
 
 <br />
 <h2>Cards Overview</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <br />
 
 
@@ -66,47 +68,52 @@
                     <th class="column1">
                         @Html.DisplayNameFor(model => model.BankingAccount)
                     </th>
-                    <th class="column1"></th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
+                        <th class="column1"></th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Provider)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.GetViewableCardNumber)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.CardHolder)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.DailyLimit)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.MontlyLimit)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.POSLimit)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                        <td class="column1">
-                            @Html.DisplayFor(modelItem => item.BankingAccountID)
-                        </td>
+                <tr>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Provider)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.GetViewableCardNumber)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.CardHolder)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.DailyLimit)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.MontlyLimit)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.POSLimit)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td class="column1">
+                        @Html.DisplayFor(modelItem => item.BankingAccountID)
+                    </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
                         <td class="column1">
                             <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-                            @Html.ActionLink("Banking Accounts", "Details", "BankingAccounts", new { id = item.BankingAccountID }, null)
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                         </td>
-                    </tr>
+                    }
+                </tr>
                 }
             </tbody>
         </table>

@@ -91,3 +91,20 @@
         display: block;
     }
 }
+
+a.my-class {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+    a.my-class:active {
+        color: #ffffff;
+    }
+
+    a.my-class:link {
+        color: #ffffff;
+    }
+
+    a.my-class:visited {
+        color: #ffffff;
+    }
