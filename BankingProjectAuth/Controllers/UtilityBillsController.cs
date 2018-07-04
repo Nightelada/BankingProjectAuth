@@ -62,6 +62,25 @@ namespace BankingProjectAuth.Controllers
             return View(utilityBill);
         }
 
+        // GET: UtilityBills/Pay/5
+        public async Task<IActionResult> Pay(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var utilityBill = await _context.UtilityBill
+                .Include(u => u.BankingAccount)
+                .SingleOrDefaultAsync(m => m.ID == id);
+            if (utilityBill == null)
+            {
+                return NotFound();
+            }
+
+            return View(utilityBill);
+        }
+
         // GET: UtilityBills/Create
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
